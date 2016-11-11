@@ -49,6 +49,9 @@ class QuizzesTableViewController: UITableViewController {
         
         return cell
     }
-
-
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//    }
 }

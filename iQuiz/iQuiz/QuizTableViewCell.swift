@@ -9,7 +9,10 @@
 import UIKit
 
 class QuizTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var quizImage: UIImageView!
+    @IBOutlet weak var quizTitle: UILabel!
+    @IBOutlet weak var quizDescription: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,8 +23,4 @@ class QuizTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    @IBOutlet weak var quizImage: UIImageView!
-    @IBOutlet weak var quizTitle: UILabel!
-    @IBOutlet weak var quizDescription: UILabel!
 }

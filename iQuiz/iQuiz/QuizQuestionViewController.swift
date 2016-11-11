@@ -9,11 +9,22 @@
 import UIKit
 
 class QuizQuestionViewController: UIViewController {
-    
+    var questions: [String] = ["question test"]
+    var answers: [String] = ["answer test"]
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var answer1Label: UILabel!
+    @IBOutlet weak var answer2Label: UILabel!
+    @IBOutlet weak var answer3Label: UILabel!
+    @IBOutlet weak var answer4Label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        questionLabel.text = questions[0]
+        answer1Label.text = answers[0]
+        answer2Label.text = answers[0]
+        answer3Label.text = answers[0]
+        answer4Label.text = answers[0]
         // Do any additional setup after loading the view.
     }
 
@@ -22,21 +33,16 @@ class QuizQuestionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func backButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func homeButton(_ sender: Any) {
+        // http://stackoverflow.com/questions/33520899/single-function-to-dismiss-all-open-view-controllers-swift
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
-
-    @IBAction func submitButton(_ sender: Any) {
     
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//    }
 }
