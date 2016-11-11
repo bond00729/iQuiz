@@ -13,7 +13,6 @@ class QuizzesTableViewController: UITableViewController {
     var quizzes: [String] = ["Math", "Science", "Marvel Superheroes"]
     var quizzesDescription: [String] = ["Improve your math skills with this fun quiz!", "Test your knowledge about science!", "Try this fun quiz about Marvel superheroes!"]
     var quizImages: [UIImage] = [UIImage(named: "math")!, UIImage(named: "science")!, UIImage(named: "superhero")!]
-
     
     @IBAction func settings(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Settings", message: "Settings tab", preferredStyle: .alert)
@@ -50,8 +49,16 @@ class QuizzesTableViewController: UITableViewController {
         return cell
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//    }
+    // gets data to pass to the next view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier! == "question") {
+            let next = (segue.destination as! QuizQuestionViewController)
+            next.questions[0] = "What is the extent of the Suns gravitational reach?"
+            next.answers.removeAll()
+            next.answers.append("The Oort cloud")
+            next.answers.append("Heliosphere")
+            next.answers.append("Pluto")
+            next.answers.append("The Kuiper Belt")
+        }
+    }    
 }

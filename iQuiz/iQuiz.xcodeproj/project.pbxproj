@@ -16,6 +16,7 @@
 		C9276AE31DCD8328005E00E7 /* QuizzesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9276AE21DCD8328005E00E7 /* QuizzesTableViewController.swift */; };
 		C9A209121DCDA40D00E97CF8 /* QuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A209111DCDA40D00E97CF8 /* QuizTableViewCell.swift */; };
 		C9AB68B91DD532E200228BB5 /* QuizAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AB68B81DD532E200228BB5 /* QuizAnswerViewController.swift */; };
+		C9AB68BB1DD5504600228BB5 /* QuizResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AB68BA1DD5504600228BB5 /* QuizResultsViewController.swift */; };
 		C9BD794B1DD0FDF000281CBC /* QuizQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BD794A1DD0FDF000281CBC /* QuizQuestionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		C9276AE21DCD8328005E00E7 /* QuizzesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizzesTableViewController.swift; sourceTree = "<group>"; };
 		C9A209111DCDA40D00E97CF8 /* QuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizTableViewCell.swift; sourceTree = "<group>"; };
 		C9AB68B81DD532E200228BB5 /* QuizAnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizAnswerViewController.swift; sourceTree = "<group>"; };
+		C9AB68BA1DD5504600228BB5 /* QuizResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizResultsViewController.swift; sourceTree = "<group>"; };
 		C9BD794A1DD0FDF000281CBC /* QuizQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizQuestionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,10 +106,11 @@
 			isa = PBXGroup;
 			children = (
 				C90350101DCD6762008CDFF1 /* AppDelegate.swift */,
-				C9276AE21DCD8328005E00E7 /* QuizzesTableViewController.swift */,
 				C9A209111DCDA40D00E97CF8 /* QuizTableViewCell.swift */,
+				C9276AE21DCD8328005E00E7 /* QuizzesTableViewController.swift */,
 				C9BD794A1DD0FDF000281CBC /* QuizQuestionViewController.swift */,
 				C9AB68B81DD532E200228BB5 /* QuizAnswerViewController.swift */,
+				C9AB68BA1DD5504600228BB5 /* QuizResultsViewController.swift */,
 				C90350141DCD6762008CDFF1 /* Main.storyboard */,
 				C90350171DCD6762008CDFF1 /* Assets.xcassets */,
 				C90350191DCD6762008CDFF1 /* LaunchScreen.storyboard */,
@@ -275,6 +278,7 @@
 				C90350111DCD6762008CDFF1 /* AppDelegate.swift in Sources */,
 				C9BD794B1DD0FDF000281CBC /* QuizQuestionViewController.swift in Sources */,
 				C9A209121DCDA40D00E97CF8 /* QuizTableViewCell.swift in Sources */,
+				C9AB68BB1DD5504600228BB5 /* QuizResultsViewController.swift in Sources */,
 				C9AB68B91DD532E200228BB5 /* QuizAnswerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
