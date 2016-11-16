@@ -10,18 +10,33 @@ import UIKit
 import Foundation
 
 class QuizzesTableViewController: UITableViewController {
+    var urlString: String = "https://tednewardsandbox.site44.com/questions.json"
     @IBOutlet var quizTableView: UITableView!
     var quizzes: [String] = ["Math", "Science", "Marvel Superheroes"]
     var quizzesDescription: [String] = ["Improve your math skills with this fun quiz!", "Test your knowledge about science!", "Try this fun quiz about Marvel superheroes!"]
     var quizImages: [UIImage] = [UIImage(named: "science")!, UIImage(named: "superhero")!, UIImage(named: "math")!]
-    var quizQuestions: [String] = []
-    var questionAnswers: [String] = []
-    var questionChoices: [[String]] = []
+    var quizQuestions: [String] = ["filler"]
+    var questionAnswers: [String] = ["filler"]
+    var questionChoices: [[String]] = [["filler", "filler", "filler", "filler"]]
+    var clicked: Int = 0
     
     @IBAction func settings(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Settings", message: "Settings tab", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(defaultAction)
+        alert.addAction(UIAlertAction(title: "Refresh", style: .default, handler: { (_) in
+            self.getJSON()
+            print("refresh")
+        }))
+        
+        //http://stackoverflow.com/questions/26567413/get-input-value-from-textfield-in-ios-alert-in-swift
+        alert.addTextField { (textField) in
+            textField.text = "URL for Questions"
+        }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+            print(self.urlString)
+            self.urlString = (alert.textFields?[0].text)!
+            print(self.urlString)
+        }))
+        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -29,10 +44,14 @@ class QuizzesTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
         
-        let url = URL(string: "https://tednewardsandbox.site44.com/questions.json")
+        self.getJSON()
+    }
+    
+    func getJSON() {
+        let url = URL(string: urlString)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             if error != nil {
-                print("ERROR")
+                print(error)
             } else {
                 if let content = data {
                     do {
@@ -48,18 +67,18 @@ class QuizzesTableViewController: UITableViewController {
                                 }
                                 if let questions = current["questions"] as? NSDictionary {
                                     if let text = questions["text"] as? String {
-                                        self.quizQuestions.append(text)
+                                        self.quizQuestions[i] = text
                                     }
                                     if let answer = questions["answer"] as? String {
-                                        self.questionAnswers.append(answer)
+                                        self.questionAnswers[i] = answer
                                     }
                                     if let answers = questions["answers"] {
-                                        self.questionChoices.insert((answers as! [String]), at: self.questionChoices.count)
+                                        self.questionChoices[i] = answers as! [String]
                                     }
                                 }
                             }
                         }
-
+                        
                     }
                     catch {
                         print("There seems to have been an error")
@@ -93,17 +112,22 @@ class QuizzesTableViewController: UITableViewController {
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.clicked = indexPath.row;
+    }
+    
     // gets data to pass to the next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier! == "question") {
             let next = (segue.destination as! QuizQuestionViewController)
             print(self.quizQuestions)
-            next.questions = self.quizQuestions
-            next.answers.removeAll()
-            next.answers.append("The Oort cloud")
-            next.answers.append("Heliosphere")
-            next.answers.append("Pluto")
-            next.answers.append("The Kuiper Belt")
+            print(clicked)
+            print(self.quizQuestions[clicked])
+            next.questions[0] = quizQuestions[clicked]
+            next.answers[0] = questionChoices[clicked][0]
+            next.answers[1] = questionChoices[clicked][1]
+            next.answers[2] = questionChoices[clicked][2]
+            next.answers[3] = questionChoices[clicked][3]
         }
     }    
 }
