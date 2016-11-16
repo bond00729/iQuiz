@@ -47,11 +47,12 @@ class QuizzesTableViewController: UITableViewController {
         self.getJSON()
     }
     
+    // https://www.youtube.com/watch?v=-ddIP7NRkmY
     func getJSON() {
         let url = URL(string: urlString)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             if error != nil {
-                print(error)
+                print("ERROR")
             } else {
                 if let content = data {
                     do {
