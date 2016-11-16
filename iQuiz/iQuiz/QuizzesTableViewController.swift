@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import Foundation
 
 class QuizzesTableViewController: UITableViewController {
     @IBOutlet var quizTableView: UITableView!
     var quizzes: [String] = ["Math", "Science", "Marvel Superheroes"]
     var quizzesDescription: [String] = ["Improve your math skills with this fun quiz!", "Test your knowledge about science!", "Try this fun quiz about Marvel superheroes!"]
-    var quizImages: [UIImage] = [UIImage(named: "math")!, UIImage(named: "science")!, UIImage(named: "superhero")!]
+    var quizImages: [UIImage] = [UIImage(named: "science")!, UIImage(named: "superhero")!, UIImage(named: "math")!]
+    var quizQuestions: [String] = []
+    var questionAnswers: [String] = []
+    var questionChoices: [[String]] = []
     
     @IBAction func settings(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Settings", message: "Settings tab", preferredStyle: .alert)
@@ -24,6 +28,46 @@ class QuizzesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
+        
+        let url = URL(string: "https://tednewardsandbox.site44.com/questions.json")
+        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+            if error != nil {
+                print("ERROR")
+            } else {
+                if let content = data {
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: content , options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                        
+                        for i in 0...json.count - 1 {
+                            if let current = json[i] as? NSDictionary {
+                                if let title = current["title"] {
+                                    self.quizzes[i] = title as! String
+                                }
+                                if let description = current["desc"] {
+                                    self.quizzesDescription[i] = description as! String
+                                }
+                                if let questions = current["questions"] as? NSDictionary {
+                                    if let text = questions["text"] as? String {
+                                        self.quizQuestions.append(text)
+                                    }
+                                    if let answer = questions["answer"] as? String {
+                                        self.questionAnswers.append(answer)
+                                    }
+                                    if let answers = questions["answers"] {
+                                        self.questionChoices.insert((answers as! [String]), at: self.questionChoices.count)
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    catch {
+                        print("There seems to have been an error")
+                    }
+                }
+            }
+        }
+        task.resume()
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,7 +97,8 @@ class QuizzesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier! == "question") {
             let next = (segue.destination as! QuizQuestionViewController)
-            next.questions[0] = "What is the extent of the Suns gravitational reach?"
+            print(self.quizQuestions)
+            next.questions = self.quizQuestions
             next.answers.removeAll()
             next.answers.append("The Oort cloud")
             next.answers.append("Heliosphere")
