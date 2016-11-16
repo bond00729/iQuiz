@@ -23,8 +23,7 @@ class QuizzesTableViewController: UITableViewController {
     @IBAction func settings(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Settings", message: "Settings tab", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Refresh", style: .default, handler: { (_) in
-            self.getJSON()
-            print("refresh")
+            self.viewDidLoad()
         }))
         
         //http://stackoverflow.com/questions/26567413/get-input-value-from-textfield-in-ios-alert-in-swift
@@ -44,12 +43,8 @@ class QuizzesTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
         
-        self.getJSON()
-    }
-    
-    // https://www.youtube.com/watch?v=-ddIP7NRkmY
-    func getJSON() {
-        let url = URL(string: urlString)
+        // https://www.youtube.com/watch?v=-ddIP7NRkmY
+        let url = URL(string: self.urlString)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             if error != nil {
                 print("ERROR")
